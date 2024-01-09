@@ -2,8 +2,10 @@ package mx.edu.utez;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
+import io.objectbox.query.Query;
 import mx.edu.utez.model.MyObjectBox;
 import mx.edu.utez.model.User;
+import mx.edu.utez.model.User_;
 
 import java.util.List;
 
@@ -16,44 +18,62 @@ public class Main {
         // Referencia a la colección o clase
         Box<User> userBox = boxStore.boxFor(User.class);
 
-        // Inserción
+        /* Inserción
         User user = new User();
         user.id = 0;
-        user.name = "Charlie";
+        user.name = "Hugo";
         userBox.put(user);
+        */
 
-        // Recuperación por Id
+        /* Recuperación por Id
         User recuperado = userBox.get(1);
         System.out.println(recuperado);
+        */
 
-        // Recuperar un usuario por ID
+
+        /* Actualización
         User userToUpdate = userBox.get(1);
         if (userToUpdate != null) {
-            userToUpdate.setName("NuevoNombre");
+            userToUpdate.setName("Daniela");
             userBox.put(userToUpdate);
             System.out.println("Usuario actualizado: " + userToUpdate);
         } else {
             System.out.println("Usuario no encontrado.");
-        }
+        }*/
 
-        // Recuperar un usuario por ID
+        /* Borrado directo
+        userBox.remove(1);
+        // Buscar registro y después se borra
+        recuperado = userBox.get(1);
+        userBox.remove(recuperado.getId());*/
+
+        /* Borrado con comprobación
         User userToDelete = userBox.get(1);
         if (userToDelete != null) {
             userBox.remove(userToDelete);
             System.out.println("Usuario eliminado: " + userToDelete);
         } else {
             System.out.println("Usuario no encontrado.");
-        }
+        }*/
 
-        // Get General
-        // Obtener todos los usuarios de la base de datos
+        /* Recuperar todos los registros
         List<User> allUsers = userBox.getAll();
-
-        // Imprimir la información de todos los usuarios
         System.out.println("Lista de todos los usuarios:");
-
         for (User users : allUsers) {
             System.out.println(users);
         }
+        */
+
+        Query<User> query = userBox
+                .query(User_.name.equal("Charlie"))
+                //.order(User_.name)
+                .build();
+        List<User> results = query.find();
+        query.close();
+        for (User user : results) {
+            System.out.println(user);
+        }
+
+
     }
 }
