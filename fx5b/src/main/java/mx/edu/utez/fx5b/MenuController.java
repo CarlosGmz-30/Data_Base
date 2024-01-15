@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class SecondController {
+public class MenuController {
 
     @FXML
     private Button buttonAssign;
@@ -30,7 +30,7 @@ public class SecondController {
     @FXML
     protected void onStudentButtonClick() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("student-crud.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage currentStage = (Stage) buttonStudent.getScene().getWindow();
@@ -42,7 +42,15 @@ public class SecondController {
 
     @FXML
     protected void onSubjectButtonClick() {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("subject-crud.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage currentStage = (Stage) buttonSubject.getScene().getWindow();
+            currentStage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

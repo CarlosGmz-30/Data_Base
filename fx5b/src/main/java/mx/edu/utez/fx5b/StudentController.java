@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import mx.edu.utez.fx5b.Alumno;
 
-public class HelloController {
+public class StudentController {
     // Zona de inicialización de los cuadros de texto :)
     @FXML
     private TextField textField1;
@@ -72,7 +72,7 @@ public class HelloController {
     @FXML
     protected void onBackButtonClick() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("second-window.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menu-window.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root, 250, 400);
             Stage currentStage = (Stage) buttonBack.getScene().getWindow();

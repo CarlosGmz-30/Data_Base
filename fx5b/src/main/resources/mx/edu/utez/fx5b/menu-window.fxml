@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="mx.edu.utez.fx5b.SecondController"
+      fx:controller="mx.edu.utez.fx5b.MenuController"
       alignment="CENTER" spacing="10.0">
     <Button fx:id="buttonAssign" onAction="#onAssignButtonClick" text="Asignación"
             style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
