@@ -1,11 +1,12 @@
 package mx.edu.utez.fx5b;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class HelloController {
     // Zona de inicialización de los cuadros de texto :)
@@ -20,6 +21,22 @@ public class HelloController {
 
     @FXML
     private TextField getTextField4;
+
+
+    // Zona de inicialización de botones
+    @FXML
+    private Button buttonInsert;
+
+
+    @FXML
+    private Button buttonUpdate;
+
+
+    @FXML
+    private Button buttonDelete;
+
+    @FXML
+    private Button buttonBack;
 
 
     // Zona de las columnas de la tabla :)
@@ -50,5 +67,18 @@ public class HelloController {
 
     @FXML
     protected void onDeleteButtonClick() {
+    }
+
+    @FXML
+    protected void onBackButtonClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("second-window.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 250, 400);
+            Stage currentStage = (Stage) buttonBack.getScene().getWindow();
+            currentStage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

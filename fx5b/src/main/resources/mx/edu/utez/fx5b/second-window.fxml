@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="mx.edu.utez.fx5b.SecondController"
+      alignment="CENTER" spacing="10.0">
+    <Button fx:id="buttonAssign" onAction="#onAssignButtonClick" text="Asignación"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="buttonStudent" onAction="#onStudentButtonClick" text="Alumno"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="buttonSubject" onAction="#onSubjectButtonClick" text="Materia"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="buttonBack" onAction="#onCloseButtonClick" text="Salir"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+</VBox>

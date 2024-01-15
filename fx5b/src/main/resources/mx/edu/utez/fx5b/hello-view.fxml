@@ -29,13 +29,18 @@
             <TextField fx:id="textField4" HBox.hgrow="ALWAYS"/>
         </VBox>
         <HBox spacing="10.0">
-            <Button onAction="#onInsertButtonClick" text="Insertar"
+            <Button fx:id="buttonInsert" onAction="#onInsertButtonClick" text="Insertar"
                     style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"/>
-            <Button onAction="#onUpdateButtonClick" text="Actualizar"
+            <Button fx:id="buttonUpdate" onAction="#onUpdateButtonClick" text="Actualizar"
                     style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"/>
-            <Button onAction="#onDeleteButtonClick" text="Eliminar"
+            <Button fx:id="buttonDelete" onAction="#onDeleteButtonClick" text="Eliminar"
                     style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"/>
         </HBox>
+        <VBox spacing="10.0" alignment="CENTER">
+            <Button fx:id="buttonBack" onAction="#onBackButtonClick" text="Volver"
+                    style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;" minWidth="215"
+                    maxWidth="215" minHeight="30" maxHeight="30"/>
+        </VBox>
     </VBox>
 
     <!-- Columna derecha -->
