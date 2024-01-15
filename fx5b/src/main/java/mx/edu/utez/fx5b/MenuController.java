@@ -35,6 +35,7 @@ public class MenuController {
             Scene scene = new Scene(root);
             Stage currentStage = (Stage) buttonStudent.getScene().getWindow();
             currentStage.setScene(scene);
+            currentStage.setTitle("Estudiantes");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,6 +49,7 @@ public class MenuController {
             Scene scene = new Scene(root);
             Stage currentStage = (Stage) buttonSubject.getScene().getWindow();
             currentStage.setScene(scene);
+            currentStage.setTitle("Materias");
         } catch (Exception e) {
             e.printStackTrace();
         }

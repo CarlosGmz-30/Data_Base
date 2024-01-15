@@ -77,6 +77,7 @@ public class StudentController {
             Scene scene = new Scene(root, 250, 400);
             Stage currentStage = (Stage) buttonBack.getScene().getWindow();
             currentStage.setScene(scene);
+            currentStage.setTitle("Menú");
         } catch (Exception e) {
             e.printStackTrace();
         }
