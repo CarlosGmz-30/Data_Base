@@ -1,31 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="mx.edu.utez.baseproyecto5b.controller.AssignController"
-          hgap="10" vgap="10">
+<GridPane hgap="10" prefHeight="440.0" prefWidth="600.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.14-internal"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.AssignController">
 
     <!-- Tabla 1  -->
-    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="5">
-        <TextField fx:id="searchField1" promptText="Buscar en Tabla 1"/>
+    <VBox alignment="CENTER" spacing="15" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <Label style="-fx-font-weight: bold; -fx-font-size: 20px">Alumnos:</Label>
+        <HBox alignment="CENTER" spacing="5">
+            <TextField fx:id="searchField1" prefHeight="26.0" prefWidth="216.0" promptText="Buscar alumnos"/>
+            <Button onAction="#buscarButtonClicked"
+                    style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar"/>
+        </HBox>
         <TableView fx:id="table1" prefHeight="200" prefWidth="300">
             <columns>
-                <TableColumn text="Columna 1"/>
+                <TableColumn fx:id="column1" maxWidth="68.8" prefWidth="68.8" text="Name"/>
+                <TableColumn fx:id="column2" maxWidth="68.8" prefWidth="68.8" text="Surname"/>
+                <TableColumn fx:id="column3" maxWidth="68.8" prefWidth="68.8" text="Lastname"/>
+                <TableColumn fx:id="column4" maxWidth="68.8" prefWidth="68.8" text="Age"/>
             </columns>
         </TableView>
     </VBox>
 
     <!-- Tabla 2 -->
-    <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="5">
-        <TextField fx:id="searchField2" promptText="Buscar en Tabla 2"/>
+    <VBox alignment="CENTER" spacing="15" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Label style="-fx-font-weight: bold; -fx-font-size: 20px">Materias:</Label>
+        <HBox alignment="CENTER" spacing="5">
+            <TextField fx:id="searchField2" prefHeight="26.0" prefWidth="216.0" promptText="Buscar materias"/>
+            <Button onAction="#buscarButtonClicked"
+                    style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar"/>
+        </HBox>
         <TableView fx:id="table2" prefHeight="200" prefWidth="300">
             <columns>
-                <TableColumn text="Columna 2"/>
+                <TableColumn fx:id="column5" prefWidth="137.6" text="Subject"/>
+                <TableColumn fx:id="column6" prefWidth="137.6" text="Teacher"/>
             </columns>
         </TableView>
     </VBox>
 
+    <VBox alignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <Region VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <!-- Botones -->
+    <HBox alignment="CENTER" spacing="5" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+        <Button style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px"
+                text="&gt;"/>
+        <Button style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px"
+                text="&lt;"/>
+    </HBox>
+
+    <Button fx:id="buttonBack" onAction="#onBackButtonClick" text="Volver"
+            style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;" minWidth="70"
+            maxWidth="70" minHeight="30" maxHeight="30" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 </GridPane>

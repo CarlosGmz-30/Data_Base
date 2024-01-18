@@ -24,7 +24,16 @@ public class MenuController {
 
     @FXML
     protected void onAssignButtonClick() {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx.edu.utez.baseproyecto5b/assign-window.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage currentStage = (Stage) buttonSubject.getScene().getWindow();
+            currentStage.setScene(scene);
+            currentStage.setTitle("Asignación");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

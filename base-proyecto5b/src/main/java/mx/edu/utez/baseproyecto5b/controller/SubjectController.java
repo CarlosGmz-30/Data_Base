@@ -66,7 +66,7 @@ public class SubjectController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/mx.edu.utez.baseproyecto5b/menu-window.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 250, 400);
+            Scene scene = new Scene(root, 600, 440);
             Stage currentStage = (Stage) buttonBack.getScene().getWindow();
             currentStage.setScene(scene);
             currentStage.setTitle("Menú");
