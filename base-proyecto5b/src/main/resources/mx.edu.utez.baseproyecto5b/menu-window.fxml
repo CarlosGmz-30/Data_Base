@@ -19,6 +19,6 @@
             style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
             minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
     <Button fx:id="buttonBack" onAction="#onCloseButtonClick" text="Salir"
-            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;"
             minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
 </VBox>
