@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -13,6 +14,13 @@ import mx.edu.utez.baseproyecto5b.model.Alumno;
 import mx.edu.utez.baseproyecto5b.model.Materia;
 
 public class AssignController {
+
+    public TableColumn column1;
+    public TableColumn column2;
+    public TableColumn column3;
+    public TableColumn column4;
+    public TableColumn column5;
+    public TableColumn column6;
 
     @FXML
     private TextField searchField1;
