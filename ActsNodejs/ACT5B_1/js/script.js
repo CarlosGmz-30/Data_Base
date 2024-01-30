@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => console.error('Error al obtener países:', error));
+
     // Estados
     fetch('/estados')
         .then(response => response.json())
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => console.error('Error al obtener estados:', error));
+
     // Municipios
     fetch('/municipios')
         .then(response => response.json())

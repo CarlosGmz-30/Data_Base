@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
+/************************* Estilos Generales *************************/
+
 * {
     font-family: 'Josefin Sans', sans-serif;
 }
+
+/************************* Estilos Selects *************************/
 
 #selectContainer {
     margin-top: 4%;
@@ -35,6 +39,8 @@ select {
     height: 40px;
     border-radius: 5px;
 }
+
+/************************* Estilos Responsivos *************************/
 
 @media only screen and (max-width: 1025px) {
     #selectContainer {
