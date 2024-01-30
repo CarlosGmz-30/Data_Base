@@ -27,8 +27,16 @@
 }
 
 #tittle {
+    max-width: 80%;
     text-align: center;
+    margin: 0 auto;
     margin-top: 5%;
+    transition: all 0.3s;
+}
+
+#tittle:hover {
+    transform: scale(1.2);
+    color: rgb(25, 163, 133);
 }
 
 label {
