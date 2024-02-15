@@ -19,6 +19,7 @@ Actualiza todos si el valor es menor que todos los registrados - $min
 Agrega elemento al array - $push
 Remueve el primer o último elemento del array - $pop
 Remueve  elementos del array de acuerdo con la condición - $pull
+Arreglos de objetos - $elemMatch
 */
 
 
@@ -203,3 +204,11 @@ db.vintage.updateOne(
     {_id: ObjectId("65ce4a1318a6854eae61f193")},
     {$pull: {version: {$ne: "GT"} } }
 )
+
+
+use sample_training
+show collections
+db.companies.find()
+
+// Para buscar en arreglos de objetos
+db.companies.find({ offices: {$elemMatch: { city: "Seattle"} } })
