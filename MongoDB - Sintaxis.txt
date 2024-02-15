@@ -1,0 +1,158 @@
+/*
+
+Dos lenguajes MQL
+Mongo Query Language - campo: { operador: valor }
+Aggregation Framework  - operador: { campo: valor }
+.pretty() - Para darle un formato bonito
+
+Mayor que - $gt
+Mayor o igual que - $gte
+Menor que - $lt
+Menor o igual que $lte
+Igual - $eq
+In de SQL - $in
+No igual - $neq
+Multiplica - $mul
+Incrementar - $inc
+Actualiza todos si el valor es mayor que todos los registrados - $max
+Actualiza todos si el valor es menor que todos los registrados - $min
+
+*/
+
+
+// Use selecciona o crea una base de datos
+use cars;
+
+// Creamos una colección
+db.createCollection("vintage")
+
+// Insertamos datos
+db.vintage.insertOne({
+    brand: "Ford",
+    model: "Mustang",
+    year: 1962,
+})
+
+// Insert Many
+db.vintage.insertMany([
+    {
+        brand: "Porsche",
+        model: "911",
+        year: 1974,
+        color: "Amarillo"
+    },
+    {
+        brand: "Lamborghini",
+        model: "Miura",
+        year: 1965,
+        color: "Vino"
+    },
+    {
+        brand: "Chevrolet",
+        model: "Corvette",
+        year: 1953,
+        color: "Vino",
+        engine: "V4",
+    },
+    {
+        brand: "Ford",
+        model: "Mustang",
+        year: 1962,
+    },
+    {
+        brand: "Jaguar",
+        model: "E-Type",
+        year: 1970,
+        color: "Azul",
+        engine: "V4",
+    },
+    {
+        brand: "Volkwagen",
+        model: "Vocho",
+        year: 1967,
+        color: "Blanco",
+        engine: "V3",
+    },
+    {
+        brand: "Chevrolet",
+        model: "Camaro",
+        year: 1966,
+        color: "Amarillo",
+        engine: "V4",
+    },
+])
+
+// Select
+db.vintage.find()
+
+// Búsqueda específica
+db.vintage.find({
+    brand: "Chevrolet",
+})
+
+db.vintage.find({
+    brand : {$eq: "Ford"},
+    year: {$lte: 1970}
+})
+
+db.vintage.find({
+    brand : "Ford",
+    year: {$lte: 1970}
+})
+
+// Uso de OR
+db.vintage.find({
+    $or: [
+        { brand: "Chevrolet" },
+        { year: { $lte: 1960 }},
+        { color: "Vino" },
+    ]
+})
+
+// Borrar datos por ID
+db.vintage.deleteOne({
+    _id: ObjectId("65cbcae707d5c1646c8a0b35")
+})
+db.vintage.find()
+
+
+// Actualizar datos
+db.vintage.updateOne({brand: "Ford"}, {$set: {color: "Azul"}})
+db.vintage.updateMany({brand: "Lamborghini"}, {$set: {color: "Vino"}})
+db.vintage.find()
+
+
+// Eliminar columnas
+db.vintage.updateMany({}, {$unset: { engine: "" }})
+db.vintage.updateMany({}, {$set: { year: "1970" }})
+db.vintage.find()
+
+
+// Borrar todos los datos
+db.vintage.deleteMany({})
+db.vintage.find()
+
+
+// Insertar la fecha actual a todos los registros $currentDate
+db.vintage.updateMany({}, {$currentDate: { fecha: true }})
+db.vintage.find()
+
+// Timestamp - Cantidad de de segundos desde el 1 de enero de 1970
+db.vintage.updateMany({}, { $currentDate: { fecha: { $type: "timestamp"} } })
+db.vintage.find()
+
+
+
+// Ordenar de Ascendente
+db.vintage.find({}, { sort: { year: 1 } })
+db.vintage.find({}).sort({ year: 1 })
+
+// Ordenar de Descendente
+db.vintage.find({}, { sort: { year: -1 } })
+db.vintage.find({}).sort({ year: -1 })
+
+// Ver cantidad de registros
+db.vintage.find().count()
+
+// Ver cantidad de registros específicos
+db.vintage.find({ year: { $lt: 1970 }}).count()
