@@ -239,3 +239,36 @@ db.companies.aggregate(
     { $limit: 1 },
     { $project: { categoria: "$_id", _id: 0 } }
 )
+
+use sample_restaurants
+db.restaurants.find()
+// ¿Cuántos tipos de comida (cuisine) sirven en los restaurantes?
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" } },
+    { $count: "Cantidad"  }
+)
+
+// ¿Cuáles son?
+db.restaurants.aggregate(
+    { $group: { _id: "$cuisine" } },
+)
+
+// ¿Qué tipo de comida es servido por la mayor cantidad de restaurantes?
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" , cantidad: { $sum: 1 } } },
+    { $sort: { cantidad: -1} },
+    { $project: { comida: "$_id", _id: 0 } },
+    { $limit: 1 }
+)
+
+// Nombre de restaurantes ubicados en Manhattan
+db.restaurants.aggregate(
+    { $match: { borough: "Manhattan" } },
+    { $project: { name: 1, _id: 0 } }
+)
+
+// Lista de tipos de comida y cantidad de restauranesque la sirven
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" , cantidad: { $sum: 1 } } },
+)
+
