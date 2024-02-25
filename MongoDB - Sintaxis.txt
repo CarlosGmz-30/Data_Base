@@ -16,7 +16,11 @@ Multiplica - $mul
 Incrementar - $inc
 Actualiza todos si el valor es mayor que todos los registrados - $max
 Actualiza todos si el valor es menor que todos los registrados - $min
-
+Agrega elemento al array - $push
+Remueve el primer o último elemento del array - $pop
+Remueve  elementos del array de acuerdo con la condición - $pull
+Arreglos de objetos - $elemMatch
+Selecciona los archivos que quieres ver - $project
 */
 
 
@@ -81,7 +85,6 @@ db.vintage.insertMany([
         engine: "V4",
     },
 ])
-
 // Select
 db.vintage.find()
 
@@ -99,7 +102,6 @@ db.vintage.find({
     brand : "Ford",
     year: {$lte: 1970}
 })
-
 // Uso de OR
 db.vintage.find({
     $or: [
@@ -108,25 +110,21 @@ db.vintage.find({
         { color: "Vino" },
     ]
 })
-
 // Borrar datos por ID
 db.vintage.deleteOne({
     _id: ObjectId("65cbcae707d5c1646c8a0b35")
 })
 db.vintage.find()
 
-
 // Actualizar datos
 db.vintage.updateOne({brand: "Ford"}, {$set: {color: "Azul"}})
 db.vintage.updateMany({brand: "Lamborghini"}, {$set: {color: "Vino"}})
 db.vintage.find()
 
-
 // Eliminar columnas
 db.vintage.updateMany({}, {$unset: { engine: "" }})
 db.vintage.updateMany({}, {$set: { year: "1970" }})
 db.vintage.find()
-
 
 // Borrar todos los datos
 db.vintage.deleteMany({})
@@ -141,8 +139,6 @@ db.vintage.find()
 db.vintage.updateMany({}, { $currentDate: { fecha: { $type: "timestamp"} } })
 db.vintage.find()
 
-
-
 // Ordenar de Ascendente
 db.vintage.find({}, { sort: { year: 1 } })
 db.vintage.find({}).sort({ year: 1 })
@@ -154,5 +150,125 @@ db.vintage.find({}).sort({ year: -1 })
 // Ver cantidad de registros
 db.vintage.find().count()
 
-// Ver cantidad de registros específicos
+// Ver cantidad de registros específjicos
 db.vintage.find({ year: { $lt: 1970 }}).count()
+
+// Insertar más de un atributo por columna
+db.vintage.insertOne({
+	brand: "Fiat",
+	model: "SL7",
+	year: 1978,
+	motor: {
+		cylinders: 4,
+		hp: 80
+	}
+})
+
+// Insertar un arreglo
+db.vintage.insertOne({
+	brand: "Nissan",
+	model: "Tsuru",
+	version: ["MT", "XR", "GT"]
+})
+
+// Notación Punto para buscar atributos dentro de un arreglo
+db.vintage.find({
+    "motor.hp": 80
+})
+
+// Notación punto para buscar por posiciones de arreglo
+db.vintage.find({
+    "version.0": "MT"
+    // "[atributo].[posición en arreglo]": [dato a buscar]
+})
+
+// Agregar elemento nuevo a atributo de arreglo
+db.vintage.updateOne(
+    {_id: ObjectId("65ce4a1318a6854eae61f193")},
+    {$push: {version: "ZT"}}
+)
+
+// Borrar el primer elemento del arreglo
+db.vintage.updateOne(
+    {_id: ObjectId("65ce4a1318a6854eae61f193")},
+    {$pop: {version: -1}}
+)
+
+// Borrar el ultimo elemento del arreglo
+db.vintage.updateOne(
+    {_id: ObjectId("65ce4a1318a6854eae61f193")},
+    {$pop: {version: 1}}
+)
+
+// Borrar elementos de acuerdo a una condición
+db.vintage.updateOne(
+    {_id: ObjectId("65ce4a1318a6854eae61f193")},
+    {$pull: {version: {$ne: "GT"} } }
+)
+
+
+use sample_training
+show collections
+db.companies.find()
+
+// Para buscar en arreglos de objetos
+db.companies.find({ offices: {$elemMatch: { city: "Seattle"} } })
+
+
+db.trips.find(
+   { $expr: { $eq: ["$end station id", "$start station id" ] } }
+)
+
+db.trips.find(
+    {"birth year": {$gt: 1985} },
+    {"end station name": 1, "start station name": 1, _id:0 }
+).sort({"birth year": 1})
+
+db.trips.aggregate(
+    { $match: {"birth year": { $gt: 1985 } } },
+    { $sort: { "birth year": 1 } },
+    { $project: {"end station name": 1, "start station name": 1, _id: 0} }
+)
+
+db.companies.find()
+
+db.companies.aggregate(
+    { $group: { _id: "$category_code", "cantidad": { $sum: 1 } } },
+    { $sort: { cantidad: 1 } },
+    { $project: { _id: 1 } },
+    { $limit: 1 },
+    { $project: { categoria: "$_id", _id: 0 } }
+)
+
+use sample_restaurants
+db.restaurants.find()
+// ¿Cuántos tipos de comida (cuisine) sirven en los restaurantes?
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" } },
+    { $count: "Cantidad"  }
+)
+
+// ¿Cuáles son?
+db.restaurants.aggregate(
+    { $group: { _id: "$cuisine" } },
+)
+
+// ¿Qué tipo de comida es servido por la mayor cantidad de restaurantes?
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" , cantidad: { $sum: 1 } } },
+    { $sort: { cantidad: -1} },
+    { $project: { comida: "$_id", _id: 0 } },
+    { $limit: 1 }
+)
+
+// Nombre de restaurantes ubicados en Manhattan
+db.restaurants.aggregate(
+    { $match: { borough: "Manhattan" } },
+    { $project: { name: 1, _id: 0 } }
+)
+
+// Lista de tipos de comida y cantidad de restauranesque la sirven
+db.restaurants.aggregate(
+    { $group: {_id: "$cuisine" , cantidad: { $sum: 1 } } },
+)
+
