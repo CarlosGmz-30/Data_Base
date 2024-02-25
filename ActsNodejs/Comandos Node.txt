@@ -1,0 +1,16 @@
+Servicio Node.js
+
+Inicializar:
+npm init-y
+
+Instalar Express:
+npm i express
+
+Instalar Nodemon (Para activar cambios automaticamente):
+npm i nodemon -D
+
+Instalar mysql2:
+npm install mysql2
+
+Instalar dotenv:
+npm i dotenv
