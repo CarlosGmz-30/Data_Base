@@ -1,0 +1,80 @@
+CREAR GRUPO DE SEGURIDAD:
+
+Ponerle Nombre y Descripcion
+Agregar reglas de entrada 
+- HTTP/ Puerto 80 / Mi IP/ 
+- MySQL/ Puerto 3306 / Mi IP/
+- SSH / Puerto 22 / Mi IP/
+
+
+CREAR INSTANCIA EC2: 
+
+Ponerle nombre
+Seleccionar la AMI de Ubuntu 64 bits
+Agregar un par de claves (Nueva o existente)
+Seleccionar o crear un grupo de seguridad
+
+
+CREAR RDS:
+Creacion estandar
+MySQL
+Capa Gratuita
+Ponerle nombre
+No se conecte al recurso informatico EC2
+Acceso publico [No]
+Grupo de seguridad [Crear Nuevo / Nombre]
+ 
+
+CONECTARSE A RDS desde EC2 - DataGrip
+
+New Data Source => MySQL
+SSH/SSL => Use SSH tunnel => ...
+[Host: IP del EC2 Username: ubuntu Auth: Key Pair]
+
+General:
+Host: Punto de enlace AWS de RDS
+User: admin
+password: admin1234
+
+*Al grupo de segurida de RDS agregarle la regla de entrada*
+MySQL/Aurora	Puerto 3306	Ip del grupo del EC2
+
+
+CREACION DEL ELASTIC BEANSTALK [Backend]
+
+Entorno de servidor web
+Nombre: servidorPrueba => Dominio: servidorPrueba
+Plataforma: Node.js => Codigo => Cargar el codigo
+	Etiqueta de version: pruebaVol
+	Selccionar archivo
+Agrega par de claves: LabRole, Vockey, LabInstanceProfile
+Dejar todo tal cual hasta las propiedades del entorno
+- MYSQL_HOST: Punto de enlace RDS
+- MYSQL_USER: admin
+- MYSQL_PASSWORD: admin1234
+- MYSQL_DATABASE: [databaseName]
+
+Agregar la regla de entrada en RDS de este nuevo SG
+MySQL/Aurora	Puerto 3306	IP del SG de Elastic
+
+
+CREACION DEL BUCKET S3 [Front-end]
+
+Crear Bucket => Uso General
+Nombre Unico
+ACL Habilitadas => Propietario del bucket preferido
+Bloquear el acceso publico [Si] => Crear
+
+Permisos - Quitar lo de bloquear acceso publico [Confirmar]
+Propiedades - Alojamiento de sitios web estaticos
+Habilitar - Alojar index.html [Guardar]
+Subir Front [Subir index como archivo y "js" y "css" como carpeta]
+
+Permisos 
+Elija entre ACL Preferidas
+Conceder acceso de lectura publico
+Entiendo...
+Cargar
+
+Importante *Cambiar las rutas de los fetch*
+
