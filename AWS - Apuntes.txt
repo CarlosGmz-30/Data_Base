@@ -15,7 +15,15 @@ Agregar un par de claves (Nueva o existente)
 Seleccionar o crear un grupo de seguridad
 
 
+Desde la terminal entrar a ssh ubuntu@54.175.10.245 -i [clave.pem]
+sudo apt update
+sudo apt install mysql-server
+sudo mysql_secure_installation
+cd /etc/mysql
+bind-address = 0.0.0.0
+
 CREAR RDS:
+
 Creacion estandar
 MySQL
 Capa Gratuita
@@ -28,7 +36,7 @@ Grupo de seguridad [Crear Nuevo / Nombre]
 CONECTARSE A RDS desde EC2 - DataGrip
 
 New Data Source => MySQL
-SSH/SSL => Use SSH tunnel => ...
+SSH/SSL => Use SSH tunnel => ...v
 [Host: IP del EC2 Username: ubuntu Auth: Key Pair]
 
 General:
